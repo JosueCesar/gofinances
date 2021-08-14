@@ -10,17 +10,30 @@ import {
   LastTransaction,
 } from './styles';
 
-const HighlightCard: React.FC = () => {
+interface HighlightCardProps {
+  title: string;
+  amount: string;
+  lastTransacrion: string;
+  type: 'up' | 'down' | 'total';
+}
+
+const icon = {
+  up: 'arrow-up-circle',
+  down: 'arrow-down-circle',
+  total: 'dollar-sign',
+}
+
+const HighlightCard: React.FC<HighlightCardProps> = ({ title, amount, lastTransacrion, type }) => {
   return (
-    <Container>
+    <Container type={type}>
       <Header>
-        <Title>Entrada</Title>
-        <Icon name="arrow-up-circle" />
+        <Title type={type}>{title}</Title>
+        <Icon name={icon[type]} type={type} />
       </Header>
 
       <Footer>
-        <Amount>R$ 17.500,50</Amount>
-        <LastTransaction>Última entrada dia 13 de abril</LastTransaction>
+        <Amount type={type}>{amount}</Amount>
+        <LastTransaction type={type}>{lastTransacrion}</LastTransaction>
       </Footer>
     </Container>
   );
